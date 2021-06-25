@@ -8,6 +8,7 @@ import { Button } from "../components/Button";
 //webpack (snowpack, vite, ...)
 
 export function NewRoom() {
+
   return (
     <div id="page-auth">
       <aside>
