@@ -1,3 +1,4 @@
+import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import illustrationImg from "../assets/images/illustration.svg";
@@ -12,6 +13,7 @@ import { useAuth } from '../hooks/useAuth';
 export function Home() {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
+  const [ roomCode, setRoomCode ] = useState('');
 
   async function handleCreateRoom() {
     if (!user) {
@@ -19,6 +21,10 @@ export function Home() {
     }
 
     history.push('/rooms/new');
+  }
+
+  async function handleJoinRoom(event: FormEvent) {
+    event
   }
 
   return (
@@ -40,6 +46,8 @@ export function Home() {
             <input
               type=""
               placeholder="Digite o código da sala"
+              onChange={event => setRoomCode(event?.target.value)}
+              value={roomCode}
             />
             <Button type="submit">
               Entrar na sala
