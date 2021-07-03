@@ -36,7 +36,7 @@ export function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Roomdoes not exists.');
+      alert('Room does not exists.');
       return;
     }
 
@@ -58,7 +58,7 @@ export function Home() {
             Crie sua sala com o google
           </button>
           <div className="separator">Ou entre em uma sala</div>
-          <form>
+          <form onSubmit={handleJoinRoom}>
             <input
               type=""
               placeholder="Digite o código da sala"
