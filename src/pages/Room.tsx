@@ -7,6 +7,7 @@ import { RoomCode } from "../components/RoomCode";
 
 import '../styles/room.scss';
 
+// parametros 2
 type RoomParams = {
   id: string;
 }
