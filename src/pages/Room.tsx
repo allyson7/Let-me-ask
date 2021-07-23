@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import logoImg from "../assets/images/logo.svg"
@@ -20,9 +20,18 @@ export function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const notify = () => toast.error('teste');
   
   const roomId = params.id;
+
+  useEffect(() => {
+    console.log(roomId);
+    // const roomRef = database.ref(`rooms/{$roomId}`);
+
+    // roomRef.once('value', room => {
+    //   console.log(room.val());
+    //   toast(room.val());
+    // })
+  }, [])
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -33,6 +42,7 @@ export function Room() {
 
     if (!user) {
       throw toast.error('You must be logged in');
+      // throw new Error('You must be logged in');
     }
     
     const question = {
@@ -67,6 +77,7 @@ export function Room() {
         </div>
 
         <form onSubmit={handleSendQuestion}>
+          <Toaster />
           <textarea
             placeholder="O que você quer perguntar?"
             onChange={event => setNewQuestion(event.target.value)}
@@ -74,7 +85,14 @@ export function Room() {
           />
 
           <div className="form-footer">
-            <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+            { user ? (
+              <div className="user-info">
+                <img src={user.avatar} alt={user.name} />
+                <span>{user.name}</span>
+              </div>
+            ) : (
+              <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+            ) }
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
