@@ -31,7 +31,7 @@ export function Room() {
     //   console.log(room.val());
     //   toast(room.val());
     // })
-  }, [])
+  }, [roomId])
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
