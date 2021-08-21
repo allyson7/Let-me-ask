@@ -37,10 +37,17 @@ export function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      toast.error('Room does not exists.', {duration: 2500});
+      toast.error('Room does not exists.', {duration: 3000});
       return;
     }
 
+    if (roomRef.val().endedAt) {
+      toast('room already closed.', {
+        icon: '⚠️',
+      });
+      return;
+    }
+    
     history.push(`/rooms/${roomCode}`);
   }
 
